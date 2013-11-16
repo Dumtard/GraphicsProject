@@ -8,6 +8,8 @@
 
 #include <string.h> // for memcmp
 
+namespace Helper {
+
 struct PackedVertex{
   glm::vec3 position;
   bool operator<(const PackedVertex that) const{
@@ -55,4 +57,6 @@ void indexVBO(
       VertexToOutIndex[packed] = newindex;
     }
   }
+}
+
 }

@@ -22,7 +22,7 @@ int Terrain::getLength() {
 }
 
 float Terrain::getHeight(const glm::vec3 &position) {
-  float height = scaled_octave_noise_3d(3, 0.9, 0.005, -2, 5,
+  float height = Helper::scaled_octave_noise_3d(3, 0.9, 0.005, -2, 5,
                                         position.x, currentSeed_, position.z);
   return height;
 }
@@ -34,7 +34,7 @@ void Terrain::generateTerrain() {
 
   std::mt19937 rng;
   rng.seed(time(0));
-  std::uniform_int_distribution<uint32_t> uint_dist(0, 1000);
+  std::uniform_int_distribution<uint32_t> uint_dist(0, 10000);
   currentSeed_ = uint_dist(rng);
 
   //Generate the terrain
@@ -47,7 +47,7 @@ void Terrain::generateTerrain() {
   for (double i = 0; i < length_; i+=1) {
     std::vector<glm::vec3> tempVertices2;
     for (double j = 0; j < width_; j+=1) {
-      glm::vec3 vertex = glm::vec3(i, scaled_octave_noise_3d(
+      glm::vec3 vertex = glm::vec3(i, Helper::scaled_octave_noise_3d(
                                       3, 0.9, 0.005, -2, 5, i, currentSeed_, j),
                                    j);
       tempVertices2.push_back(vertex);
@@ -57,7 +57,7 @@ void Terrain::generateTerrain() {
   std::cout << "Done" << std::endl << "Triangulating...";
   generateFaces(tempVertices, vertices2);
   std::cout << "Done" << std::endl << "Indexing...";
-  indexVBO(vertices2, indices, vertices);
+  Helper::indexVBO(vertices2, indices, vertices);
   std::cout << "Done" << std::endl << "Generating Normals...";
   generateNormals();
   std::cout << "Done" << std::endl;

@@ -6,7 +6,7 @@ View::View(Camera &camera, Terrain &terrain) : camera_(camera),
            terrain_(terrain) {
   projection = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 1000.0f);
 
-  programID = LoadShaders("shaders/VertexShader.vert",
+  programID = Helper::LoadShaders("shaders/VertexShader.vert",
                           "shaders/FragmentShader.frag");
 
   matrixID = glGetUniformLocation(programID, "MVP");
