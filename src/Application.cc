@@ -46,20 +46,14 @@ void Application::initialize() {
   // Accept fragment if it closer to the camera than the former one
   glDepthFunc(GL_LESS);
 
+  glfwSetInputMode(window_, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+  
   const GLFWvidmode* vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
   glfwSetWindowPos(window_, (vidmode->width - windowWidth) / 2,
                            (vidmode->height - windowHeight) / 2);
 
   screen_ = std::unique_ptr<Screen>(new Screen(camera_, window_));
-
-  for (double i = 0; i < 100; i+=0.1) {
-    for (double j = 0; j < 100; j+=0.1) {
-      // std::cout << j << ", " << octave_noise_3d(3, 0.9, 0.25, i, j, 0) << std::endl; 
-      // << ", " << i << std::endl;
-      // octave_noise_3d(3, 0.9, 0.25, i, j, 0);
-    }
-  }
 }
 
 GLFWwindow* Application::getWindow() {
@@ -90,7 +84,7 @@ void Application::update() {
 void Application::render() {
   // Clear the screen
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  glClearColor(1, 1, 1, 1);
+  glClearColor(0, 1, 1, 1);
 
   screen_->render();
 

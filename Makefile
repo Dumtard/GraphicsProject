@@ -45,7 +45,7 @@ $(ODIR)/%.o: $(SDIR)/%.cc $(DEPS)
 	$(CC) -c $(CFLAGS) -o $@ $<
 
 $(EXECUTABLE): $(OBJ)
-	$(CC) -o $@ $^ $(LIBS)
+	$(CC) -o $@ $^ $(LIBS) $(RELEASE)
 
 run:
 	./$(EXECUTABLE)

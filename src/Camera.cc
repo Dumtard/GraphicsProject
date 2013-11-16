@@ -5,7 +5,7 @@
 Camera::Camera() {
   x_ = y_ = 0;
 
-  position_ = glm::vec3(1, 5, 1);
+  position_ = glm::vec3(20, 1, 20);
   direction_ = glm::vec3(0, 0, 1);
   upDirection_ = glm::vec3(0, 1, 0);
   rightDirection_ = glm::cross(direction_, upDirection_);

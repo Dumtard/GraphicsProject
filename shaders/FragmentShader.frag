@@ -17,9 +17,9 @@ void main() {
 
   float z = gl_FragCoord.z / gl_FragCoord.w;
 
-  //if (position.y < 0) color = vec3(0, 0, 1);
-  //else if (position.y >= 0 && position.y <= 5)
+  if (position.y < 0) color = vec3(0, 0, 1);
+  else if (position.y >= 0 && position.y <= 5)
     color = vec3(0, 1, 0) * Iamb + Idiff;
-    color *= (z/10);
+  //color *= (z/10);
 
 }
