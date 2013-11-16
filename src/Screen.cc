@@ -19,6 +19,7 @@ void Screen::input() {
 }
 
 void Screen::update() {
+  controller_.update();
   camera_.update();
   view_.update();
 }

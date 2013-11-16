@@ -21,12 +21,19 @@ public:
   void generateTerrain();
   void render(GLuint &programID);
 
+  float getHeight(const glm::vec3 &position);
+  int getWidth();
+  int getLength();
+
 private:
   void generateFaces(std::vector<std::vector<glm::vec3>> &tempVertices,
                      std::vector<glm::vec3> &vertices2);
   void generateNormals();
 
-  unsigned int currentSeed;
+  unsigned int currentSeed_;
+
+  int width_;
+  int length_;
 
   GLuint VertexArrayID;
   GLuint vertexbuffer;

@@ -1,6 +1,8 @@
 #ifndef CONTROLLER_H_
 #define CONTROLLER_H_
 
+#include <iostream>
+
 #include "Camera.h"
 #include "Terrain.h"
 

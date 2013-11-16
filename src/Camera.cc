@@ -3,7 +3,9 @@
 #include <iostream>
 
 Camera::Camera() {
-  position_ = glm::vec3(0, 5, 0);
+  x_ = y_ = 0;
+
+  position_ = glm::vec3(1, 5, 1);
   direction_ = glm::vec3(0, 0, 1);
   upDirection_ = glm::vec3(0, 1, 0);
   rightDirection_ = glm::cross(direction_, upDirection_);
@@ -28,8 +30,6 @@ glm::vec3 Camera::getPosition() {
 
 void Camera::setPosition(glm::vec3 position) {
   position_ = position;
-  // std::cout << position.x << ", " << position.y << ", " 
-            // << position.z << std::endl;
 }
 
 glm::vec3 Camera::getDirection() {
@@ -38,6 +38,7 @@ glm::vec3 Camera::getDirection() {
 
 void Camera::setDirection(glm::vec3 direction) {
   direction_ = direction;
+  rightDirection_ = glm::cross(direction_, upDirection_);
 }
 
 glm::vec3 Camera::getUpDirection() {
@@ -54,4 +55,20 @@ glm::vec3 Camera::getRightDirection() {
 
 void Camera::setRightDirection(glm::vec3 rightDirection) {
   rightDirection_ = rightDirection;
+}
+
+float Camera::getX() {
+  return x_;
+}
+
+void Camera::setX(float x) {
+  x_ = fmod(x, 360);
+}
+
+float Camera::getY() {
+  return y_;
+}
+
+void Camera::setY(float y) {
+  y_ = fmod(y, 360);
 }

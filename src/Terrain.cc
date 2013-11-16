@@ -2,13 +2,29 @@
 
 #include <iostream>
 
-Terrain::Terrain() { 
+Terrain::Terrain() {
+  currentSeed_ = 0;
+  width_ = length_ = 500;
 }
 
 Terrain::~Terrain() {
   glDeleteBuffers(1, &vertexbuffer);
   glDeleteBuffers(1, &normalbuffer);
   glDeleteVertexArrays(1, &VertexArrayID);
+}
+
+int Terrain::getWidth() {
+  return width_;
+}
+
+int Terrain::getLength() {
+  return length_;
+}
+
+float Terrain::getHeight(const glm::vec3 &position) {
+  float height = scaled_octave_noise_3d(3, 0.9, 0.005, -2, 5,
+                                        position.x, currentSeed_, position.z);
+  return height;
 }
 
 void Terrain::generateTerrain() {
@@ -19,20 +35,20 @@ void Terrain::generateTerrain() {
   std::mt19937 rng;
   rng.seed(time(0));
   std::uniform_int_distribution<uint32_t> uint_dist(0, 1000);
-  currentSeed = uint_dist(rng);
+  currentSeed_ = uint_dist(rng);
 
   //Generate the terrain
-  std::cout << "Seed: " << currentSeed << std::endl;
+  std::cout << "Seed: " << currentSeed_ << std::endl;
   std::cout << "Generating heights...";
 
   std::vector<std::vector<glm::vec3>> tempVertices;
   std::vector<glm::vec3> vertices2;
 
-  for (double i = 0; i < 500; i+=1) {
+  for (double i = 0; i < length_; i+=1) {
     std::vector<glm::vec3> tempVertices2;
-    for (double j = 0; j < 500; j+=1) {
+    for (double j = 0; j < width_; j+=1) {
       glm::vec3 vertex = glm::vec3(i, scaled_octave_noise_3d(
-                                      3, 0.9, 0.005, -2, 5, i, currentSeed, j),
+                                      3, 0.9, 0.005, -2, 5, i, currentSeed_, j),
                                    j);
       tempVertices2.push_back(vertex);
     }
@@ -126,9 +142,6 @@ void Terrain::generateNormals() {
 
   for (unsigned int i = 0; i < normals.size(); i++) {
     normals[i] = glm::normalize(normals[i]);
-    // std::cout << normals[i].x << ", "
-    //           << normals[i].y << ", "
-    //           << normals[i].z << std::endl;
   }
 }
 
