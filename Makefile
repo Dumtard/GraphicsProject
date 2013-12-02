@@ -28,8 +28,8 @@ DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
 #Source Files
 _SRC = Main.cc Application.cc View.cc Controller.cc \
-Screen.cc Camera.cc Terrain.cc \
-Shader.cc SimplexNoise.cc VboIndexer.cc 
+Screen.cc Camera.cc Terrain.cc Tree.cc Branch.cc \
+Shader.cc SimplexNoise.cc VboIndexer.cc Texture.cc
 
 #Objects
 _OBJ = $(_SRC:.cc=.o)
@@ -45,7 +45,7 @@ $(ODIR)/%.o: $(SDIR)/%.cc $(DEPS)
 	$(CC) -c $(CFLAGS) -o $@ $<
 
 $(EXECUTABLE): $(OBJ)
-	$(CC) -o $@ $^ $(LIBS) $(RELEASE)
+	$(CC) -o $@ $^ $(LIBS) 
 
 run:
 	./$(EXECUTABLE)

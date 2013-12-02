@@ -12,6 +12,7 @@
 
 #include "SimplexNoise.h"
 #include "VboIndexer.h"
+#include "Texture.h"
 
 class Terrain {
 public:
@@ -26,8 +27,7 @@ public:
   int getLength();
 
 private:
-  void generateFaces(std::vector<std::vector<glm::vec3>> &tempVertices,
-                     std::vector<glm::vec3> &vertices2);
+  void generateFaces(std::vector<std::vector<glm::vec3>> &tempVertices);
   void generateNormals();
 
   unsigned int currentSeed_;
@@ -38,14 +38,16 @@ private:
   GLuint VertexArrayID;
   GLuint vertexbuffer;
   GLuint normalbuffer;
+  GLuint uvbuffer;
   GLuint elementbuffer;
+
+  GLuint texture_;
+  GLuint textureID_;
 
   std::vector<unsigned int> indices;
   std::vector<glm::vec3> vertices;
   std::vector<glm::vec3> normals;
-
-  //REMOVE
-  // std::vector<glm::vec3> vertices2;
+  std::vector<glm::vec2> uvs;
 };
 
 #endif

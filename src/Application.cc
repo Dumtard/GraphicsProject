@@ -7,11 +7,11 @@ Application::~Application() {
 
 void Application::initialize() {
 
-  // windowWidth = 1366;
-  // windowHeight = 768;
+  windowWidth = 1280;
+  windowHeight = 720;
 
-  windowWidth = 800;
-  windowHeight = 600;
+  // windowWidth = 800;
+  // windowHeight = 600;
 
   // Initialize the library
   if (!glfwInit())
@@ -45,7 +45,8 @@ void Application::initialize() {
   glCullFace(GL_BACK);
   // Accept fragment if it closer to the camera than the former one
   glDepthFunc(GL_LESS);
-
+  glEnable(GL_TEXTURE_2D);
+  
   glfwSetInputMode(window_, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
   
   const GLFWvidmode* vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());

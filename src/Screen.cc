@@ -1,13 +1,19 @@
 #include "Screen.h"
 
-#include <iostream>
-
 Screen::Screen(Camera &camera, GLFWwindow* window) :
-               window_(window), camera_(camera), view_(camera, terrain_),
-               controller_(camera, window, terrain_) {
+               window_(window), camera_(camera),
+               view_(camera, terrain_, trees_),
+               controller_(camera, window, terrain_, trees_) {
 
-terrain_.generateTerrain();
+  terrain_.generateTerrain();
 
+  rng_.seed(time(0));
+
+  for (unsigned int i = 0; i < 100; i++) {
+    Tree tree(rng_);
+    tree.generateTree(terrain_);
+    trees_.push_back(tree);
+  }
 }
 
 Screen::~Screen() {

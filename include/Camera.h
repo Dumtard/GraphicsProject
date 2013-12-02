@@ -14,7 +14,7 @@ public:
 
   void update();
 
-  glm::mat4 getView();
+  glm::mat4& getView();
 
   glm::vec3 getPosition();
   void setPosition(glm::vec3 position);

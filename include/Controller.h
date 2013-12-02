@@ -2,13 +2,16 @@
 #define CONTROLLER_H_
 
 #include <iostream>
+#include <vector>
 
 #include "Camera.h"
 #include "Terrain.h"
+#include "Tree.h"
 
 class Controller {
 public:
-  Controller(Camera &camera, GLFWwindow* window, Terrain &terrain);
+  Controller(Camera &camera, GLFWwindow* window, Terrain &terrain,
+             std::vector<Tree> &trees);
   ~Controller();
 
   void update();
@@ -19,6 +22,7 @@ private:
 
   Camera &camera_;
   Terrain &terrain_;
+  std::vector<Tree> &trees_;
 };
 
 #endif

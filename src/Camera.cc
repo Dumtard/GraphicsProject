@@ -20,7 +20,7 @@ void Camera::update() {
   view_ = glm::lookAt(position_, position_ + direction_, upDirection_);
 }
 
-glm::mat4 Camera::getView() {
+glm::mat4& Camera::getView() {
   return view_;
 }
 

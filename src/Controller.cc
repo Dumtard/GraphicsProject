@@ -1,7 +1,9 @@
 #include "Controller.h"
 
-Controller::Controller(Camera &camera, GLFWwindow* window, Terrain &terrain) :
-                       window_(window), camera_(camera), terrain_(terrain) {
+Controller::Controller(Camera &camera, GLFWwindow* window, Terrain &terrain,
+                       std::vector<Tree> &trees) :
+                       window_(window), camera_(camera), terrain_(terrain),
+                       trees_(trees) {
 
 }
 
@@ -64,6 +66,9 @@ void Controller::input() {
   }
   if (glfwGetKey(window_, GLFW_KEY_R) == GLFW_PRESS) {
     terrain_.generateTerrain();
+    for (auto& tree : trees_) {
+      tree.generateTree(terrain_);
+    }
   }
 
   // Mouse rotation

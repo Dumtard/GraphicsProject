@@ -1,6 +1,8 @@
 #ifndef VIEW_H_
 #define VIEW_H_
 
+#include <vector>
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
@@ -10,13 +12,14 @@
 #include "Shader.h"
 #include "Camera.h"
 #include "Terrain.h"
+#include "Tree.h"
 
 class View {
 public:
-  View(Camera &camera, Terrain &terrain);
+  View(Camera &camera, Terrain &terrain, std::vector<Tree> &trees);
   ~View();
 
-  glm::mat4 getProjection();
+  glm::mat4& getProjection();
 
   void update();
   void render();
@@ -24,10 +27,14 @@ public:
 private:
   Camera &camera_;
   Terrain &terrain_;
+  std::vector<Tree> &trees_;
 
-  GLuint programID;
+  GLuint terrainProgramID_;
+  GLuint treeProgramID_;
 
   GLuint matrixID;
+  GLuint mID;
+  GLuint vID;
 
   glm::mat4 projection;
 

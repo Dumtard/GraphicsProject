@@ -3,6 +3,7 @@
 
 #include "Controller.h"
 #include "Terrain.h"
+#include "Tree.h"
 #include "View.h"
 
 class Screen {
@@ -19,9 +20,12 @@ private:
   Camera &camera_;
 
   Terrain terrain_;
+  std::vector<Tree> trees_;
 
   View view_;
   Controller controller_;
+
+  std::mt19937 rng_;
 };
 
 #endif
